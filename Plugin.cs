@@ -17,6 +17,7 @@ namespace ConsoleCommands
         int ticker = 0;
         bool maxhp_active = false;
         int maxhp_amount = 100;
+        bool indestructible = false;
         public void Log(string message)
         {
             
@@ -179,6 +180,50 @@ namespace ConsoleCommands
                 Log($"set their maxHP to {choice}");
             }
 
+            if (command.StartsWith("/respawn"))
+            {
+                PlayerStatus[] playerStatuses = FindObjectsOfType<PlayerStatus>();
+                for (int i = 0; i < playerStatuses.Length; i++)
+                {
+                    if (playerStatuses[i].IsPlayerDead())
+                    {
+                        playerStatuses[i].Respawn();
+                        Log("Respawned player");
+                    }
+                }
+            }
+
+            if (command.StartsWith("/indestructible"))
+            {
+                indestructible = true;
+                Log("all buildings are now indestructible");
+                GameObject[] all = FindObjectsOfType<GameObject>();
+                for (int i = 0; i < all.Length; i++)
+                {
+                    if (all[i].name == "Planks_floor(Clone)")
+                    {
+                        Hitable hitable = all[i].GetComponent<Hitable>();
+                        hitable.maxHp = 999999999;
+                        hitable.hp = 999999999;
+                        hitable.canHitMoreThanOnce = false;
+                    }
+                    else if (all[i].name == "Planks_Wall(Clone)")
+                    {
+                        Hitable hitable = all[i].GetComponent<Hitable>();
+                        hitable.maxHp = 999999999;
+                        hitable.hp = 999999999;
+                        hitable.canHitMoreThanOnce = false;
+                    }
+                    else if (all[i].name == "Planks_Stairs(Clone)")
+                    {
+                        Hitable hitable = all[i].GetComponent<Hitable>();
+                        hitable.maxHp = 999999999;
+                        hitable.hp = 999999999;
+                        hitable.canHitMoreThanOnce = false;
+                    }
+                }
+            }
+
             if (command.StartsWith("/gold"))
             {
                 
@@ -241,9 +286,39 @@ namespace ConsoleCommands
                     {
                         PlayerStatus playerStatus = PlayerStatus.Instance;
                         playerStatus.maxHp = maxhp_amount;
-                        playerStatus.hp = maxhp_amount;
+                        //playerStatus.hp = maxhp_amount;
+                    }
+                    if (indestructible)
+                    {
+                        GameObject[] all = FindObjectsOfType<GameObject>();
+                        for (int i = 0; i < all.Length; i++)
+                        {
+                            if (all[i].name == "Planks_floor(Clone)")
+                            {
+                                Hitable hitable = all[i].GetComponent<Hitable>();
+                                hitable.maxHp = 999999999;
+                                hitable.hp = 999999999;
+                                hitable.canHitMoreThanOnce = false;
+                            }
+                            else if (all[i].name == "Planks_Wall(Clone)")
+                            {
+                                Hitable hitable = all[i].GetComponent<Hitable>();
+                                hitable.maxHp = 999999999;
+                                hitable.hp = 999999999;
+                                hitable.canHitMoreThanOnce = false;
+                            }
+                            else if (all[i].name == "Planks_Stairs(Clone)")
+                            {
+                                Hitable hitable = all[i].GetComponent<Hitable>();
+                                hitable.maxHp = 999999999;
+                                hitable.hp = 999999999;
+                                hitable.canHitMoreThanOnce = false;
+                            }
+                        }
                     }
                     
+
+                    ticker = 0;
                 }
                 if (Input.GetKeyDown(KeyCode.Slash))
                 {
