@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <AssemblyName>ConsoleCommands</AssemblyName>
-    <Description>My first plugin</Description>
+    <Description>console commands</Description>
     <Version>1.0.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
@@ -18,5 +18,8 @@
   
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+	<Reference Include="main assembly">
+		<HintPath>C:\Program Files (x86)\Steam\steamapps\common\Muck\Muck_Data\Managed\Assembly-CSharp.dll</HintPath>
+	</Reference>
   </ItemGroup>
 </Project>
