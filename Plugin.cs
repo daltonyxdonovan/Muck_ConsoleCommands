@@ -2,8 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
-using System.Text.RegularExpressions;
+using HarmonyLib;
+using System.Reflection;
 using UnityEngine.SceneManagement;
 
 namespace ConsoleCommands
@@ -11,18 +11,31 @@ namespace ConsoleCommands
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
-
+        public string[] item_names = new string[] {"Bark","Chest","Coal","Coin","Flint","Adamantite Boots","Chunkium Boots","Gold Boots","Mithril Boots","Obamium Boots","Steel Boots","Wolfskin Boots","Adamantite Helmet","Chunkium Helmet","Gold Helmet","Mithril Helmet","Obamium Helmet","Steel Helmet","Wolfskin Helmet","Adamantite Pants","Chunkium Pants","Gold Pants","Mithril Pants","Obamium Pants","Steel Pants","Wolfskin Pants","Adamantite Chestplate","Chunkium Chestplate","Gold Chestplate","Mithril Chestplate","Obamium Chestplate","Steel Chestplate","Wolfskin Chestplate","Wood Doorway","Wood Doorway","Wood Floor","Wood Pole","Wood Pole","Wood Roof","Wood stairs","Wood stairs thinn","Wood Wall","Wood Wall Half","Wood Wall Tilted","Torch","Red Apple","Bowl","Dough","Flax Fibers","Flax","Raw Meat","Gulpon Shroom","Ligon Shroom","Slurbon Shroom","Sugon Shroom","Wheat","Bread","Cooked Meat","Apple Pie","Meat Pie","Meat Soup","Purple Soup","Red Soup","Weird Soup","Yellow Soup","AncientCore","Adamantite bar","Chunkium bar","Gold bar","Iron bar","Mithril bar","Obamium bar","Ancient Bone","Dragonball","Fireball","Lightningball","Rock Projectile","Rock Projectile","Gronk Projectile","Spike Attack","Gronk Projectile","Waterball","Windball","Adamantite Ore","Chunkium Ore","Gold Ore","Iron Ore","Mithril Ore","Obamium Ore","Ruby","Rock","Birch Wood","Dark Oak Wood","Fir Wood","Wood","Oak Wood","Anvil","Cauldron","Fletching Table","Furnace","Workbench","Boat Map","Gem Map","Blue Gem","Green Gem","Pink Gem","Red Gem","Yellow Gem","Adamantite Axe","Gold Axe","Mithril Axe","Steel Axe","Wood Axe","Oak Bow","Wood Bow","Birch bow","Fir bow","Ancient Bow","Adamantite Pickaxe","Gold Pickaxe","Mithril Pickaxe","Steel Pickaxe","Wood Pickaxe","Rope","Shovel","Adamantite Sword","Gold Sword","Mithril Sword","Obamium Sword","Steel Sword","milk","Adamantite Arrow","Fire arrow","Flint Arrow","Lightning Arrow","Mithril Arrow","Steel Arrow","Water Arrow","Chiefs Spear","Chunky Hammer","Gronks Sword","Gronks Sword Projectile","Night Blade","Wyvern Dagger","Black Shard","Blade","Hammer Shaft","Spear Tip","Sword Hilt","Wolf Claws","Wolfskin","Wyvern Claws"};
+        public string[] commands = new string[] {"/give", "/maxhp", "/maxstamina", "maxshield", "/maxhunger", "/totem", "/respawn", "/gold", "/nomobs", "/nobosses", "/heal", "/indestructible"};
         ChatBox chatBox;
         bool active = false;
         int ticker = 0;
         bool maxhp_active = false;
-        int maxhp_amount = 100;
+        public int maxhp_amount = 100;
+        public static int maxhp_amount_static = 100;
         bool indestructible = false;
+        bool noBosses = false;
+        bool noMobs = false;
+
+
+
+
         public void Log(string message)
         {
             
             Logger.LogInfo(message);
             chatBox.SendMessage("<color=red>" + message + "</color>");
+        }
+
+        public void EarlyUpdate()
+        {
+
         }
 
         public void DropItemIntoWorld(InventoryItem item)
@@ -127,7 +140,7 @@ namespace ConsoleCommands
         {
             // Plugin startup logic
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
-            //find the object named chatBox
+            
         }
 
         public void ChatCommand(string message)
@@ -174,11 +187,30 @@ namespace ConsoleCommands
                     choice = 1;
                 }
                 maxhp_amount = choice;
-
+                maxhp_amount_static = choice;
                 playerStatus.maxHp = choice;
                 playerStatus.hp = choice;
-                Log($"set their maxHP to {choice}");
+                Harmony.CreateAndPatchAll(typeof(PatchUpdateStats));
+                Log($"set  maxHP to {choice}");
             }
+
+            if (command.StartsWith("/nomobs"))
+            {
+                bool choice = bool.Parse(command.Split()[1]);
+                noMobs = choice;
+                Log("set noMobs to " + choice);
+                
+            }
+
+            if (command.StartsWith("/nobosses"))
+            {
+                bool choice = bool.Parse(command.Split()[1]);
+                noBosses = choice;
+                Log("set noBosses to " + choice);
+                
+            }
+
+
 
             if (command.StartsWith("/respawn"))
             {
@@ -191,6 +223,54 @@ namespace ConsoleCommands
                         Log("Respawned player");
                     }
                 }
+            }
+
+            if (command.StartsWith("/maxstamina"))
+            {
+                int choice = int.Parse(command.Split()[1]);
+                if (choice < 1)
+                {
+                    choice = 1;
+                }
+                PlayerStatus.Instance.maxStamina = choice;
+                PlayerStatus.Instance.stamina = choice;
+                Log("set maxStamina to " + choice);
+            }
+
+            if (command.StartsWith("/maxhunger"))
+            {
+                int choice = int.Parse(command.Split()[1]);
+                if (choice < 1)
+                {
+                    choice = 1;
+                }
+                PlayerStatus.Instance.maxHunger = choice;
+                PlayerStatus.Instance.hunger = choice;
+                Log("set maxHunger to " + choice);
+            }
+
+            if (command.StartsWith("/maxshield"))
+            {
+                int choice = int.Parse(command.Split()[1]);
+                if (choice < 1)
+                {
+                    choice = 1;
+                }
+                PlayerStatus.Instance.maxShield = choice;
+                PlayerStatus.Instance.shield = choice;
+                Log("set maxShield to " + choice);
+            }
+
+            if (command.StartsWith("/totem"))
+            {
+                GameObject totem = GameObject.Find("TotemRespawn(Clone)");
+                if (totem == null)
+                {
+                    Log("no totem found");
+                    return;
+                }
+                totem.transform.position = PlayerMovement.Instance.transform.position;
+                Log("moved totem to player");
             }
 
             if (command.StartsWith("/indestructible"))
@@ -224,16 +304,68 @@ namespace ConsoleCommands
                 }
             }
 
+            if (command.StartsWith("/print"))
+            {
+                foreach (InventoryItem inventoryItem in ItemManager.Instance.allItems.Values)
+                {
+                    Log(inventoryItem.name);
+                }
+            }
+
+            if (command.StartsWith("/give"))
+            {
+                //input as '/give (Wyvern Dagger) 33'
+                string[] splitCommand = command.Split();
+                string itemName = "";
+                int itemAmount = 1;
+                bool inParentheses = false;
+                foreach (string word in splitCommand)
+                {
+                    if (inParentheses)
+                    {
+                        itemName += word + " ";
+                        if (word.EndsWith(")"))
+                        {
+                            inParentheses = false;
+                            itemName = itemName.TrimEnd(')');
+                        }
+                    }
+                    if (word.StartsWith("("))
+                    {
+                        inParentheses = true;
+                        itemName += word.Substring(1) + " ";
+                    }
+                    else if (!inParentheses && word != "/give")
+                    {
+                        
+                    }
+                }
+                itemAmount = int.Parse(splitCommand[splitCommand.Length - 1]);
+                
+                itemName = itemName.Substring(0, itemName.IndexOf(')'));
+                //Log(itemName);
+                //Log(itemAmount.ToString());
+                InventoryItem item = ItemManager.Instance.GetItemByName(itemName);
+                if (item == null)
+                {
+                    Log("Item not found");
+                    return;
+                }
+                item.amount = itemAmount;
+                AddItemToInventory(item);
+                Log($"gave {itemAmount} {itemName} to self");
+            }
+
             if (command.StartsWith("/gold"))
             {
-                
+                int amount = command.Split().Length > 1 ? int.Parse(command.Split()[1]) : 999;
                 InventoryCell[] cells = FindObjectsOfType<InventoryCell>();
                 bool done = false;
                 for (int i = 0; i < cells.Length; i++)
                 {
                     if (!(cells[i].currentItem == null) && cells[i].currentItem.name == "Coin" && !done)
                     {
-                        cells[i].currentItem.amount += 99999;
+                        cells[i].currentItem.amount += amount;
                         done = true;
                     }
                 }
@@ -241,11 +373,12 @@ namespace ConsoleCommands
                 if (!done)
                 {
                     InventoryItem gold = ItemManager.Instance.GetItemByName("Coin");
+                    gold.amount = amount;
                     AddItemToInventory(gold);
 
                 }
 
-                Log($"added gold to inventory");
+                Log($"added {amount} gold to inventory");
                 
             }
         }
@@ -282,11 +415,52 @@ namespace ConsoleCommands
                 ticker++;
                 if (ticker > 600)
                 {
+                    
                     if (maxhp_active)
                     {
                         PlayerStatus playerStatus = PlayerStatus.Instance;
                         playerStatus.maxHp = maxhp_amount;
                         //playerStatus.hp = maxhp_amount;
+                    }
+                    if (noMobs)
+                    {
+                        GameObject[] all = FindObjectsOfType<GameObject>();
+                        for (int i = 0; i < all.Length; i++)
+                        {
+                            if (all[i].name == "Goblin(Clone)")
+                            {
+                                Destroy(all[i]);
+                            }
+                            if (all[i].name == "lilDave(Clone)")
+                            {
+                                Destroy(all[i]);
+                            }
+                        }
+                    }
+                    if (noBosses)
+                    {
+                        GameObject[] all = FindObjectsOfType<GameObject>();
+                        for (int i = 0; i < all.Length; i++)
+                        {
+                            if (all[i].name == "Gronk(Clone)")
+                            {
+                                Destroy(all[i]);
+                            }
+                            
+                            if (all[i].name == "Chief(Clone)")
+                            {
+                                Destroy(all[i]);
+                            }
+                            if (all[i].name == "BigChonk(Clone)")
+                            {
+                                Destroy(all[i]);
+                            }
+                            if (all[i].name == "Guardian(Clone)")
+                            {
+                                Destroy(all[i]);
+                            }
+                            
+                        }
                     }
                     if (indestructible)
                     {
@@ -375,6 +549,25 @@ namespace ConsoleCommands
 
 
 
+        }
+    
+    
+        
+
+    }
+
+
+    class PatchUpdateStats
+    {
+        [HarmonyPatch(typeof(PlayerStatus), "UpdateStats")] // Specify target method with HarmonyPatch attribute
+        [HarmonyPrefix]
+
+        
+        public static void UpdateRealStats(ref bool __runOriginal)
+        {
+            
+            __runOriginal = false;
+            return; // Skip original method
         }
     }
 }
