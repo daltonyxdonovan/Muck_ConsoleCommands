@@ -21,5 +21,11 @@
 	<Reference Include="main assembly">
 		<HintPath>C:\Program Files (x86)\Steam\steamapps\common\Muck\Muck_Data\Managed\Assembly-CSharp.dll</HintPath>
 	</Reference>
+	<Reference Include="tmpro assembly">
+		<HintPath>C:\Program Files (x86)\Steam\steamapps\common\Muck\Muck_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+	</Reference>
+	<Reference Include="tmpro assembly">
+		<HintPath>C:\Program Files (x86)\Steam\steamapps\common\Muck\Muck_Data\Managed\UnityEngine.UI.dll</HintPath>
+	</Reference>
   </ItemGroup>
 </Project>
