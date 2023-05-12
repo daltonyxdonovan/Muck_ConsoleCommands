@@ -12,6 +12,7 @@ namespace ConsoleCommands
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
+#region  Variables
         public string[] item_names = new string[] {"(Bark)","(Chest)","(Coal)","(Coin)","(Flint)","(Adamantite Boots)","(Chunkium Boots)","(Gold Boots)","(Mithril Boots)","(Obamium Boots)","(Steel Boots)","(Wolfskin Boots)","(Adamantite Helmet)","(Chunkium Helmet)","(Gold Helmet)","(Mithril Helmet)","(Obamium Helmet)","(Steel Helmet)","(Wolfskin Helmet)","(Adamantite Pants)","(Chunkium Pants)","(Gold Pants)","(Mithril Pants)","(Obamium Pants)","(Steel Pants)","(Wolfskin Pants)","(Adamantite Chestplate)","(Chunkium Chestplate)","(Gold Chestplate)","(Mithril Chestplate)","(Obamium Chestplate)","(Steel Chestplate)","(Wolfskin Chestplate)","(Wood Doorway)","(Wood Doorway)","(Wood Floor)","(Wood Pole)","(Wood Pole)","(Wood Roof)","(Wood stairs)","(Wood stairs thinn)","(Wood Wall)","(Wood Wall Half)","(Wood Wall Tilted)","(Torch)","(Red Apple)","(Bowl)","(Dough)","(Flax Fibers)","(Flax)","(Raw Meat)","(Gulpon Shroom)","(Ligon Shroom)","(Slurbon Shroom)","(Sugon Shroom)","(Wheat)","(Bread)","(Cooked Meat)","(Apple Pie)","(Meat Pie)","(Meat Soup)","(Purple Soup)","(Red Soup)","(Weird Soup)","(Yellow Soup)","(AncientCore)","(Adamantite bar)","(Chunkium bar)","(Gold bar)","(Iron bar)","(Mithril bar)","(Obamium bar)","(Ancient Bone)","(Dragonball)","(Fireball)","(Lightningball)","(Rock Projectile)","(Rock Projectile)","(Gronk Projectile)","(Spike Attack)","(Gronk Projectile)","(Waterball)","(Windball)","(Adamantite Ore)","(Chunkium Ore)","(Gold Ore)","(Iron Ore)","(Mithril Ore)","(Obamium Ore)","(Ruby)","(Rock)","(Birch Wood)","(Dark Oak Wood)","(Fir Wood)","(Wood)","(Oak Wood)","(Anvil)","(Cauldron)","(Fletching Table)","(Furnace)","(Workbench)","(Boat Map)","(Gem Map)","(Blue Gem)","(Green Gem)","(Pink Gem)","(Red Gem)","(Yellow Gem)","(Adamantite Axe)","(Gold Axe)","(Mithril Axe)","(Steel Axe)","(Wood Axe)","(Oak Bow)","(Wood Bow)","(Birch bow)","(Fir bow)","(Ancient Bow)","(Adamantite Pickaxe)","(Gold Pickaxe)","(Mithril Pickaxe)","(Steel Pickaxe)","(Wood Pickaxe)","(Rope)","(Shovel)","(Adamantite Sword)","(Gold Sword)","(Mithril Sword)","(Obamium Sword)","(Steel Sword)","(milk)","(Adamantite Arrow)","(Fire arrow)","(Flint Arrow)","(Lightning Arrow)","(Mithril Arrow)","(Steel Arrow)","(Water Arrow)","(Chiefs Spear)","(Chunky Hammer)","(Gronks Sword)","(Gronks Sword Projectile)","(Night Blade)","(Wyvern Dagger)","(Black Shard)","(Blade)","(Hammer Shaft)","(Spear Tip)","(Sword Hilt)","(Wolf Claws)","(Wolfskin)","(Wyvern Claws)"};
         public string[] first_commands = new string[] {"/give", "/maxhp", "/maxstamina", "maxshield", "/maxhunger", "/totem", "/respawn", "/gold", "/nomobs", "/nobosses", "/heal", "/indestructible", "/help"};
         public string[] help_commands = new string[] {"give", "maxhp", "maxstamina", "maxshield", "maxhunger", "totem", "respawn", "gold", "nomobs", "nobosses", "heal", "indestructible", "help"};
@@ -30,7 +31,9 @@ namespace ConsoleCommands
         TextMeshProUGUI ac_text;
         bool done = false;
 
-
+        #endregion Variables
+        
+        
         public void Log(string message)
         {
             Logger.LogInfo(message);
@@ -138,6 +141,7 @@ namespace ConsoleCommands
             
         }
 
+        //ChatCommand is where we actually parse the commands that are sent to the chat
         public void ChatCommand(string message)
         {
             if (message.Length <= 0)
