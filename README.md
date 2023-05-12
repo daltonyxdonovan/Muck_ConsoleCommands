@@ -10,7 +10,7 @@ I am open to suggestions for commands, and have plenty of free time. Just drop a
 
 To install this project, follow these steps:
 
-1. Install bepinex to Muck (I use bepinex 6 from the github here: https://github.com/BepInEx/BepInEx/releases)
+1. Install bepinex to Muck (I use bepinex 6 from the github here: https://github.com/BepInEx/BepInEx/releases) DOES NOT WORK WITH BEPINEX 5.4
 2. Start the game at least once, to populate bepinex folders
 3. Put this ConsoleCommands.DLL into "steamapps/common/Muck/BepInEx/Plugins" and start game!
 
