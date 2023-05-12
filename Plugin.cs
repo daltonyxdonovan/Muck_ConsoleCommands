@@ -33,14 +33,8 @@ namespace ConsoleCommands
 
         public void Log(string message)
         {
-            
             Logger.LogInfo(message);
             chatBox.SendMessage("<color=red>" + message + "</color>");
-        }
-
-        public void EarlyUpdate()
-        {
-
         }
 
         public void DropItemIntoWorld(InventoryItem item)
@@ -110,14 +104,12 @@ namespace ConsoleCommands
 
         public void ClearMessage()
         {
-            
             chatBox.inputField.text = "";
 		    chatBox.inputField.interactable = false;
         }
 
         public void CustomSendMessage(string message)
         {
-            
             chatBox.typing = false;
             message = TrimMessage(message);
             if (message == "")
@@ -126,7 +118,6 @@ namespace ConsoleCommands
             }
             if (message[0] == '/')
             {
-               
                 // If the last character of the message is '/', remove it and return the updated message
                 if (message[message.Length - 1] == '/')
                 {
@@ -143,14 +134,12 @@ namespace ConsoleCommands
 
         public void Awake()
         {
-            // Plugin startup logic
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
             
         }
 
         public void ChatCommand(string message)
         {
-            
             if (message.Length <= 0)
             {
                 return;
@@ -158,12 +147,9 @@ namespace ConsoleCommands
             string command = message;
             chatBox.inputField.text = "";
 		    chatBox.inputField.interactable = false;
-            
-
 
             if (command.StartsWith("/heal"))
             {
-                
                 int choice = int.Parse(command.Split()[1]);
                 
                 if (choice < 1)
@@ -171,9 +157,6 @@ namespace ConsoleCommands
                     choice = 1;
                     Log("cannot use a value less than 1");
                 }
-                
-                
-
                 PlayerStatus.Instance.Heal(choice);
                 Log($"healed {choice} hp");
                 return;
@@ -182,8 +165,6 @@ namespace ConsoleCommands
             if (command.StartsWith("/maxhp"))
             {
                 maxhp_active = true;
-
-
                 PlayerStatus playerStatus = PlayerStatus.Instance;
                 int choice = int.Parse(command.Split()[1]);
                 
@@ -317,7 +298,6 @@ namespace ConsoleCommands
 
             if (command.StartsWith("/give"))
             {
-                //input as '/give (Wyvern Dagger) 33'
                 string[] splitCommand = command.Split();
                 string itemName = "";
                 int itemAmount = 1;
@@ -346,8 +326,6 @@ namespace ConsoleCommands
                 itemAmount = int.Parse(splitCommand[splitCommand.Length - 1]);
                 
                 itemName = itemName.Substring(0, itemName.IndexOf(')'));
-                //Log(itemName);
-                //Log(itemAmount.ToString());
                 InventoryItem item = ItemManager.Instance.GetItemByName(itemName);
                 if (item == null)
                 {
@@ -447,7 +425,7 @@ namespace ConsoleCommands
                 indestructible = false;
                 noBosses = false;
                 noMobs = false;
-
+                //reset all the variables to gracefully handle returning to the lobby
 
                 return;
             }
@@ -461,15 +439,12 @@ namespace ConsoleCommands
                     {
                         if (chatBox.inputField.text.Split()[0] == "/give")
                         {
-                            //Log(input.Split().Length.ToString());
                             string[] textToDisplay = chatBox.inputField.text.Split();
                             for (int i = 0; i < item_names.Length; i++)
                             {
-                                //Log(textToDisplay[0].ToString());
                                 if (textToDisplay[1] != "" && textToDisplay[1] != " " && item_names[i].StartsWith(textToDisplay[1].ToString()))
                                 {
                                     ac_text.text = ac_text.text + " " + item_names[i];
-                                    //Log(command_text.text);
                                 }
                             }
 
@@ -477,33 +452,20 @@ namespace ConsoleCommands
                             if (Input.GetKeyDown(KeyCode.Tab)) 
                             {
                                 string[] strings = ac_text.text.Split();
-
                                 string first_word = chatBox.inputField.text.Split()[0].ToString();
-                                
                                 string needed_word = strings[1].ToString();
-                                
-                                
-
                                 chatBox.inputField.text = first_word + " " + needed_word;
-                                
-                                
                                 chatBox.inputField.caretPosition = chatBox.inputField.text.Length + 1;
-
-                                
-
                             }
                         }
                         else if (chatBox.inputField.text.Split()[0] == "/help")
                         {
-                            //Log(input.Split().Length.ToString());
                             string[] textToDisplay = chatBox.inputField.text.Split();
                             for (int i = 0; i < help_commands.Length; i++)
                             {
-                                //Log(textToDisplay[0].ToString());
                                 if (textToDisplay[1] != "" && textToDisplay[1] != " " && help_commands[i].StartsWith(textToDisplay[1].ToString()))
                                 {
                                     ac_text.text = ac_text.text + " " + help_commands[i];
-                                    //Log(command_text.text);
                                 }
                             }
 
@@ -511,33 +473,20 @@ namespace ConsoleCommands
                             if (Input.GetKeyDown(KeyCode.Tab)) 
                             {
                                 string[] strings = ac_text.text.Split();
-
                                 string first_word = chatBox.inputField.text.Split()[0].ToString();
-                                
                                 string needed_word = strings[1].ToString();
-                                
-                                
-
                                 chatBox.inputField.text = first_word + " " + needed_word;
-                                
-                                
                                 chatBox.inputField.caretPosition = chatBox.inputField.text.Length + 1;
-
-                                
-
                             }
                         }
                         else    
                         {
-                            //Log(input.Split().Length.ToString());
                             string[] textToDisplay = chatBox.inputField.text.Split();
                             for (int i = 0; i < first_commands.Length; i++)
                             {
-                                //Log(textToDisplay[0].ToString());
                                 if (textToDisplay[1] != "" && textToDisplay[1] != " " && item_names[i].StartsWith(textToDisplay[1].ToString()))
                                 {
                                     ac_text.text = ac_text.text + " " + first_commands[i];
-                                    //Log(command_text.text);
                                 }
                             }
 
@@ -545,20 +494,10 @@ namespace ConsoleCommands
                             if (Input.GetKeyDown(KeyCode.Tab)) 
                             {
                                 string[] strings = ac_text.text.Split();
-
                                 string first_word = chatBox.inputField.text.Split()[0].ToString();
-                                
                                 string needed_word = strings[1].ToString();
-                                
-                                
-
                                 chatBox.inputField.text = first_word + " " + needed_word;
-                                
-                                
                                 chatBox.inputField.caretPosition = chatBox.inputField.text.Length + 1;
-
-                                
-
                             }
                         }
                     }
@@ -567,23 +506,18 @@ namespace ConsoleCommands
                         if (chatBox.inputField.text == "") return;
                         for (int i = 0; i < first_commands.Length; i++)
                         {
-                            //Log(textToDisplay[0].ToString());
                             if (first_commands[i].StartsWith(chatBox.inputField.text.ToString()))
                             {
                                 ac_text.text = ac_text.text + " " + first_commands[i];
-                                //Log(command_text.text);
                             }
                         }
                         //autocomplete for first word
                         if (Input.GetKeyDown(KeyCode.Tab))
                         {
                             string[] strings = ac_text.text.Split();
-                            
                             string needed_word = strings[1].ToString();
                             chatBox.inputField.text = needed_word;
-                            
                             chatBox.inputField.caretPosition = chatBox.inputField.text.Length+1;
-                            
                         }
                     }
                 }
@@ -593,11 +527,8 @@ namespace ConsoleCommands
                 }
             }
             
-            
-            //if active and scene name is 'GameAfterLobby'
             if (!active && ticker == 0)
             {
-                //try to reference chat without causing an error
                 chatBox = GameObject.Find("Chat").GetComponent<ChatBox>();
                 if (chatBox == null)
                     active = false;
@@ -605,13 +536,7 @@ namespace ConsoleCommands
                 {
                     active = true;
                     canvas = GameObject.Find("UI (1)").GetComponent<Canvas>();
-                    if (canvas != null)
-                    {
-                        //Log("found canvas, it is named " + canvas.name);
-                    }
-                    
                 }
-                    
             }
 
             if (!active)
@@ -619,11 +544,8 @@ namespace ConsoleCommands
                 ticker++;
                 if (ticker > 120)
                 {
-                    
                     ticker = 0;
                 }
-                   
-                
             }
             else if (active)
             {
@@ -635,7 +557,6 @@ namespace ConsoleCommands
                     {
                         PlayerStatus playerStatus = PlayerStatus.Instance;
                         playerStatus.maxHp = maxhp_amount;
-                        //playerStatus.hp = maxhp_amount;
                     }
                     if (noMobs)
                     {
@@ -732,26 +653,15 @@ namespace ConsoleCommands
                     if (!done)
                     {
                         myPanel = new GameObject("daltonyx_panel");
-                        //Log(myPanel.name + " created");
                         myPanel.transform.SetParent(canvas.transform, false);
-                        
-                        //canvas.gameObject.AddComponent<TextMeshProUGUI>();
                         ac_text = myPanel.AddComponent<TextMeshProUGUI>();
-                        if (ac_text != null)
-                        {
-                            //Log("found ac_text");
-                        }
                         ac_text.fontSize = 17;
                         ac_text.color = Color.white;
-                        //set ac_text to bold
                         ac_text.fontStyle = FontStyles.Bold;
                         ac_text.alignment = TextAlignmentOptions.Left;
                         myPanel.transform.position = new Vector3(chatBox.inputField.transform.position.x-118, chatBox.inputField.transform.position.y-17, chatBox.inputField.transform.position.z);
-                        //allow overflow
                         ac_text.enableWordWrapping = false;
                         ac_text.overflowMode = TextOverflowModes.Overflow;
-
-                        
                         done = true;
                     }
                     
@@ -761,9 +671,7 @@ namespace ConsoleCommands
                         // If the last character of the message is '/', remove it and return the updated message
                         if (chatBox.inputField.text[chatBox.inputField.text.Length - 1] == '/')
                         {
-                            //trim the last character
                             chatBox.inputField.text = chatBox.inputField.text.Substring(0, chatBox.inputField.text.Length - 1);
-
                         }
                         CustomSendMessage(chatBox.inputField.text);
                     }
@@ -801,17 +709,8 @@ namespace ConsoleCommands
                     base.CancelInvoke("HideChat");
                     base.Invoke("HideChat", 5f);
                 }
-
-
             }
-
-
-
         }
-    
-
-        
-
     }
 
 
@@ -820,10 +719,8 @@ namespace ConsoleCommands
         [HarmonyPatch(typeof(PlayerStatus), "UpdateStats")] // Specify target method with HarmonyPatch attribute
         [HarmonyPrefix]
 
-        
         public static void UpdateRealStats(ref bool __runOriginal)
         {
-            
             __runOriginal = false;
             return; // Skip original method
         }
