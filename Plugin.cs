@@ -14,6 +14,7 @@ namespace ConsoleCommands
     {
         public string[] item_names = new string[] {"(Bark)","(Chest)","(Coal)","(Coin)","(Flint)","(Adamantite Boots)","(Chunkium Boots)","(Gold Boots)","(Mithril Boots)","(Obamium Boots)","(Steel Boots)","(Wolfskin Boots)","(Adamantite Helmet)","(Chunkium Helmet)","(Gold Helmet)","(Mithril Helmet)","(Obamium Helmet)","(Steel Helmet)","(Wolfskin Helmet)","(Adamantite Pants)","(Chunkium Pants)","(Gold Pants)","(Mithril Pants)","(Obamium Pants)","(Steel Pants)","(Wolfskin Pants)","(Adamantite Chestplate)","(Chunkium Chestplate)","(Gold Chestplate)","(Mithril Chestplate)","(Obamium Chestplate)","(Steel Chestplate)","(Wolfskin Chestplate)","(Wood Doorway)","(Wood Doorway)","(Wood Floor)","(Wood Pole)","(Wood Pole)","(Wood Roof)","(Wood stairs)","(Wood stairs thinn)","(Wood Wall)","(Wood Wall Half)","(Wood Wall Tilted)","(Torch)","(Red Apple)","(Bowl)","(Dough)","(Flax Fibers)","(Flax)","(Raw Meat)","(Gulpon Shroom)","(Ligon Shroom)","(Slurbon Shroom)","(Sugon Shroom)","(Wheat)","(Bread)","(Cooked Meat)","(Apple Pie)","(Meat Pie)","(Meat Soup)","(Purple Soup)","(Red Soup)","(Weird Soup)","(Yellow Soup)","(AncientCore)","(Adamantite bar)","(Chunkium bar)","(Gold bar)","(Iron bar)","(Mithril bar)","(Obamium bar)","(Ancient Bone)","(Dragonball)","(Fireball)","(Lightningball)","(Rock Projectile)","(Rock Projectile)","(Gronk Projectile)","(Spike Attack)","(Gronk Projectile)","(Waterball)","(Windball)","(Adamantite Ore)","(Chunkium Ore)","(Gold Ore)","(Iron Ore)","(Mithril Ore)","(Obamium Ore)","(Ruby)","(Rock)","(Birch Wood)","(Dark Oak Wood)","(Fir Wood)","(Wood)","(Oak Wood)","(Anvil)","(Cauldron)","(Fletching Table)","(Furnace)","(Workbench)","(Boat Map)","(Gem Map)","(Blue Gem)","(Green Gem)","(Pink Gem)","(Red Gem)","(Yellow Gem)","(Adamantite Axe)","(Gold Axe)","(Mithril Axe)","(Steel Axe)","(Wood Axe)","(Oak Bow)","(Wood Bow)","(Birch bow)","(Fir bow)","(Ancient Bow)","(Adamantite Pickaxe)","(Gold Pickaxe)","(Mithril Pickaxe)","(Steel Pickaxe)","(Wood Pickaxe)","(Rope)","(Shovel)","(Adamantite Sword)","(Gold Sword)","(Mithril Sword)","(Obamium Sword)","(Steel Sword)","(milk)","(Adamantite Arrow)","(Fire arrow)","(Flint Arrow)","(Lightning Arrow)","(Mithril Arrow)","(Steel Arrow)","(Water Arrow)","(Chiefs Spear)","(Chunky Hammer)","(Gronks Sword)","(Gronks Sword Projectile)","(Night Blade)","(Wyvern Dagger)","(Black Shard)","(Blade)","(Hammer Shaft)","(Spear Tip)","(Sword Hilt)","(Wolf Claws)","(Wolfskin)","(Wyvern Claws)"};
         public string[] first_commands = new string[] {"/give", "/maxhp", "/maxstamina", "maxshield", "/maxhunger", "/totem", "/respawn", "/gold", "/nomobs", "/nobosses", "/heal", "/indestructible", "/help"};
+        public string[] help_commands = new string[] {"give", "maxhp", "maxstamina", "maxshield", "maxhunger", "totem", "respawn", "gold", "nomobs", "nobosses", "heal", "indestructible", "help"};
         ChatBox chatBox;
         GameObject myPanel;
         string[] choices;
@@ -215,8 +216,6 @@ namespace ConsoleCommands
                 
             }
 
-
-
             if (command.StartsWith("/respawn"))
             {
                 PlayerStatus[] playerStatuses = FindObjectsOfType<PlayerStatus>();
@@ -397,33 +396,33 @@ namespace ConsoleCommands
                 if (command.Split().Length > 1)
                 {
                     string choice = command.Split()[1];
-                    if (choice == "/maxstamina")
+                    if (choice == "maxstamina")
                         Log("/maxstamina <amount> - sets max stamina to <amount>");
-                    if (choice == "/maxhp")
+                    if (choice == "maxhp")
                         Log("/maxhp <amount> - sets max hp to <amount>");
-                    if (choice == "/maxhunger")
+                    if (choice == "maxhunger")
                         Log("/maxhunger <amount> - sets max hunger to <amount>");
-                    if (choice == "/maxshield")
+                    if (choice == "maxshield")
                         Log("/maxshield <amount> - sets max shield to <amount>");
-                    if (choice == "/totem")
+                    if (choice == "totem")
                         Log("/totem - moves totem to player");
-                    if (choice == "/indestructible")
+                    if (choice == "indestructible")
                         Log("/indestructible - makes all buildings indestructible");
-                    if (choice == "/nobosses")
+                    if (choice == "nobosses")
                         Log("/nobosses <true/false> - removes all bosses");
-                    if (choice == "/nomobs")
+                    if (choice == "nomobs")
                         Log("/nomobs <true/false> - removes all mobs");
-                    if (choice == "/heal")
+                    if (choice == "heal")
                         Log("/heal <amount> - heals player for <amount> hp");
-                    if (choice == "/print")
+                    if (choice == "print")
                         Log("/print - prints all item names to bepinex log. go to bepinex/config/bepinex.cfg and change logging to true for complete usage.");
-                    if (choice == "/give")
+                    if (choice == "give")
                         Log("/give (<item name>) <amount> - gives <amount> of <item name> to player. Parentheses are needed!");
-                    if (choice == "/gold")
+                    if (choice == "gold")
                         Log("/gold <amount> - gives <amount> gold to player");
-                    if (choice == "/list")
+                    if (choice == "list")
                         Log("/list - lists all commands");
-                    if (choice == "/help")
+                    if (choice == "help")
                         Log("/help <command> - gives info on <command>");
                 }
                 else
@@ -445,6 +444,11 @@ namespace ConsoleCommands
                 active = false;
                 ticker = 0;
                 done = false;
+                maxhp_active = false;
+                indestructible = false;
+                noBosses = false;
+                noMobs = false;
+
 
                 return;
             }
@@ -490,7 +494,41 @@ namespace ConsoleCommands
 
                             }
                         }
-                        else
+                        else if (chatBox.inputField.text.Split()[0] == "/help")
+                        {
+                            //Log(input.Split().Length.ToString());
+                            string[] textToDisplay = chatBox.inputField.text.Split();
+                            for (int i = 0; i < help_commands.Length; i++)
+                            {
+                                //Log(textToDisplay[0].ToString());
+                                if (textToDisplay[1] != "" && textToDisplay[1] != " " && help_commands[i].StartsWith(textToDisplay[1].ToString()))
+                                {
+                                    ac_text.text = ac_text.text + " " + item_names[i];
+                                    //Log(command_text.text);
+                                }
+                            }
+
+                            //this is for autocomplete for the second word
+                            if (Input.GetKeyDown(KeyCode.Tab)) 
+                            {
+                                string[] strings = ac_text.text.Split();
+
+                                string first_word = chatBox.inputField.text.Split()[0].ToString();
+                                
+                                string needed_word = strings[1].ToString();
+                                
+                                
+
+                                chatBox.inputField.text = first_word + " " + needed_word;
+                                
+                                
+                                chatBox.inputField.caretPosition = chatBox.inputField.text.Length + 1;
+
+                                
+
+                            }
+                        }
+                        else    
                         {
                             //Log(input.Split().Length.ToString());
                             string[] textToDisplay = chatBox.inputField.text.Split();
@@ -648,23 +686,33 @@ namespace ConsoleCommands
                             if (all[i].name == "Planks_floor(Clone)")
                             {
                                 Hitable hitable = all[i].GetComponent<Hitable>();
+                                BuildDestruction buildDestruction = all[i].GetComponent<BuildDestruction>();
                                 hitable.maxHp = 999999999;
                                 hitable.hp = 999999999;
                                 hitable.canHitMoreThanOnce = false;
+                                buildDestruction.connectedToGround = true;
+                                buildDestruction.directlyGrounded = true;
+                                
                             }
                             else if (all[i].name == "Planks_Wall(Clone)")
                             {
                                 Hitable hitable = all[i].GetComponent<Hitable>();
+                                BuildDestruction buildDestruction = all[i].GetComponent<BuildDestruction>();
                                 hitable.maxHp = 999999999;
                                 hitable.hp = 999999999;
                                 hitable.canHitMoreThanOnce = false;
+                                buildDestruction.connectedToGround = true;
+                                buildDestruction.directlyGrounded = true;
                             }
                             else if (all[i].name == "Planks_Stairs(Clone)")
                             {
                                 Hitable hitable = all[i].GetComponent<Hitable>();
+                                BuildDestruction buildDestruction = all[i].GetComponent<BuildDestruction>();
                                 hitable.maxHp = 999999999;
                                 hitable.hp = 999999999;
                                 hitable.canHitMoreThanOnce = false;
+                                buildDestruction.connectedToGround = true;
+                                buildDestruction.directlyGrounded = true;
                             }
                         }
                     }
