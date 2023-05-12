@@ -1,9 +1,9 @@
 {
     "name": "ConsoleCommands",
-    "version_number": "0.9.3",
+    "version_number": "0.9.6",
     "website_url": "",
-    "description": "USE BEPINEX6! increase max health, stamina, hunger, shield, give items, spawn a totem, unlimited gold! disable mobs/bosses! INVINCIBLE BUILDINGS! Floating bases! NOTE: nomobs is WIP some mobs may appear.",
+    "description": "MANUALLY INSTALL BEPINEX 6 FROM HERE: https://github.com/BepInEx/BepInEx/releases and install to steamapps/common/muck. hmu on discord for help Daltonyx#4105",
     "dependencies": [
-        "Daltonyx-BepInExPack_Muck6-6.0.0"
+        
     ]
 }
