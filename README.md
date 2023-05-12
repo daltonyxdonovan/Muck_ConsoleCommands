@@ -1,3 +1,4 @@
+![Console Commands for Muck!](https://github.com/daltonyxdonovan/Muck_ConsoleCommands/icon.png)
 # MUCK CONSOLE COMMANDS BY DALTONYX <3
 
 Adds several console commands to muck, to increase max health, stamina, hunger, shield, give any item, spawn a totem to respawn friends, give yourself unlimited gold! disable mobs or bosses if you want an easy playthrough!
