@@ -17,7 +17,6 @@ namespace ConsoleCommands
         public string[] help_commands = new string[] {"give", "maxhp", "maxstamina", "maxshield", "maxhunger", "totem", "respawn", "gold", "nomobs", "nobosses", "heal", "indestructible", "help"};
         ChatBox chatBox;
         GameObject myPanel;
-        string[] choices;
         bool active = false;
         int ticker = 0;
         bool maxhp_active = false;
@@ -503,7 +502,7 @@ namespace ConsoleCommands
                                 //Log(textToDisplay[0].ToString());
                                 if (textToDisplay[1] != "" && textToDisplay[1] != " " && help_commands[i].StartsWith(textToDisplay[1].ToString()))
                                 {
-                                    ac_text.text = ac_text.text + " " + item_names[i];
+                                    ac_text.text = ac_text.text + " " + help_commands[i];
                                     //Log(command_text.text);
                                 }
                             }
@@ -651,6 +650,14 @@ namespace ConsoleCommands
                             {
                                 Destroy(all[i]);
                             }
+                            if (all[i].name == "StoneGolem(Clone)")
+                            {
+                                Destroy(all[i]);
+                            }
+                            if (all[i].name == "Wolf(Clone)")
+                            {
+                                Destroy(all[i]);
+                            }
                         }
                     }
                     if (noBosses)
@@ -739,7 +746,7 @@ namespace ConsoleCommands
                         //set ac_text to bold
                         ac_text.fontStyle = FontStyles.Bold;
                         ac_text.alignment = TextAlignmentOptions.Left;
-                        myPanel.transform.position = new Vector3(chatBox.inputField.transform.position.x-82, chatBox.inputField.transform.position.y-17, chatBox.inputField.transform.position.z);
+                        myPanel.transform.position = new Vector3(chatBox.inputField.transform.position.x-118, chatBox.inputField.transform.position.y-17, chatBox.inputField.transform.position.z);
                         //allow overflow
                         ac_text.enableWordWrapping = false;
                         ac_text.overflowMode = TextOverflowModes.Overflow;

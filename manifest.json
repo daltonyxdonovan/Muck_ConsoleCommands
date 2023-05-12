@@ -1,0 +1,9 @@
+{
+    "name": "ConsoleCommands",
+    "version_number": "0.9.1",
+    "website_url": "",
+    "description": "Add console commands! increase max health, stamina, hunger, shield, give items, spawn a totem, unlimited gold! disable mobs/bosses! INVINCIBLE BUILDINGS! Floating bases! leave suggestions and I'll do it! NOTE: nomobs is WIP some mobs may appear.",
+    "dependencies": [
+        "BepInEx-BepInExPack_Muck-5.4.1101"
+    ]
+}
