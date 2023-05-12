@@ -289,6 +289,55 @@ namespace ConsoleCommands
                         hitable.hp = 999999999;
                         hitable.canHitMoreThanOnce = false;
                     }
+                    else if (all[i].name == "Planks_Pole_half(Clone)")
+                    {
+                        Hitable hitable = all[i].GetComponent<Hitable>();
+                        hitable.maxHp = 999999999;
+                        hitable.hp = 999999999;
+                        hitable.canHitMoreThanOnce = false;
+                    }
+                    else if (all[i].name == "Planks_Pole(Clone)")
+                    {
+                        Hitable hitable = all[i].GetComponent<Hitable>();
+                        hitable.maxHp = 999999999;
+                        hitable.hp = 999999999;
+                        hitable.canHitMoreThanOnce = false;
+                    }
+                    else if (all[i].name == "Planks_Tilt(Clone)")
+                    {
+                        Hitable hitable = all[i].GetComponent<Hitable>();
+                        hitable.maxHp = 999999999;
+                        hitable.hp = 999999999;
+                        hitable.canHitMoreThanOnce = false;
+                    }
+                    else if (all[i].name == "Planks_Stairs_Half(Clone)")
+                    {
+                        Hitable hitable = all[i].GetComponent<Hitable>();
+                        hitable.maxHp = 999999999;
+                        hitable.hp = 999999999;
+                        hitable.canHitMoreThanOnce = false;
+                    }
+                    else if (all[i].name == "Planks_Roof(Clone)")
+                    {
+                        Hitable hitable = all[i].GetComponent<Hitable>();
+                        hitable.maxHp = 999999999;
+                        hitable.hp = 999999999;
+                        hitable.canHitMoreThanOnce = false;
+                    }
+                    else if (all[i].name == "Planks_Doorway(Clone)")
+                    {
+                        Hitable hitable = all[i].GetComponent<Hitable>();
+                        hitable.maxHp = 999999999;
+                        hitable.hp = 999999999;
+                        hitable.canHitMoreThanOnce = false;
+                    }
+                    else if (all[i].name == "Planks_WallHalf(Clone)")
+                    {
+                        Hitable hitable = all[i].GetComponent<Hitable>();
+                        hitable.maxHp = 999999999;
+                        hitable.hp = 999999999;
+                        hitable.canHitMoreThanOnce = false;
+                    }
                 }
             }
 
@@ -530,7 +579,25 @@ namespace ConsoleCommands
                     myPanel.SetActive(false);
                 }
             }
-            
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                PickupInteract pickupInteract = FindObjectOfType<PickupInteract>();
+                if (pickupInteract != null)
+                {   
+                    if (pickupInteract.item.name == "Planks_Stairs(Clone)" || 
+                        pickupInteract.item.name == "Planks_Wall(Clone)" || 
+                        pickupInteract.item.name == "Planks_floor(Clone)" || 
+                        pickupInteract.item.name == "Planks_Pole_half(Clone)" || 
+                        pickupInteract.item.name == "Planks_Pole(Clone)" || 
+                        pickupInteract.item.name == "Planks_Tilt(Clone)" || 
+                        pickupInteract.item.name == "Planks_Stairs_Half(Clone)" || 
+                        pickupInteract.item.name == "Planks_Roof(Clone)" || 
+                        pickupInteract.item.name == "Planks_Doorway(Clone)" || 
+                        pickupInteract.item.name == "Planks_WallHalf(Clone)")
+                        
+                        pickupInteract.RemoveObject();
+                }
+            }
             if (!active && ticker == 0)
             {
                 chatBox = GameObject.Find("Chat").GetComponent<ChatBox>();
