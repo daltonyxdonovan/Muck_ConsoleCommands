@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using HarmonyLib;
 using System.Reflection;
+using System;
 using UnityEngine.SceneManagement;
 
 namespace ConsoleCommands
@@ -11,9 +12,11 @@ namespace ConsoleCommands
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
-        public string[] item_names = new string[] {"Bark","Chest","Coal","Coin","Flint","Adamantite Boots","Chunkium Boots","Gold Boots","Mithril Boots","Obamium Boots","Steel Boots","Wolfskin Boots","Adamantite Helmet","Chunkium Helmet","Gold Helmet","Mithril Helmet","Obamium Helmet","Steel Helmet","Wolfskin Helmet","Adamantite Pants","Chunkium Pants","Gold Pants","Mithril Pants","Obamium Pants","Steel Pants","Wolfskin Pants","Adamantite Chestplate","Chunkium Chestplate","Gold Chestplate","Mithril Chestplate","Obamium Chestplate","Steel Chestplate","Wolfskin Chestplate","Wood Doorway","Wood Doorway","Wood Floor","Wood Pole","Wood Pole","Wood Roof","Wood stairs","Wood stairs thinn","Wood Wall","Wood Wall Half","Wood Wall Tilted","Torch","Red Apple","Bowl","Dough","Flax Fibers","Flax","Raw Meat","Gulpon Shroom","Ligon Shroom","Slurbon Shroom","Sugon Shroom","Wheat","Bread","Cooked Meat","Apple Pie","Meat Pie","Meat Soup","Purple Soup","Red Soup","Weird Soup","Yellow Soup","AncientCore","Adamantite bar","Chunkium bar","Gold bar","Iron bar","Mithril bar","Obamium bar","Ancient Bone","Dragonball","Fireball","Lightningball","Rock Projectile","Rock Projectile","Gronk Projectile","Spike Attack","Gronk Projectile","Waterball","Windball","Adamantite Ore","Chunkium Ore","Gold Ore","Iron Ore","Mithril Ore","Obamium Ore","Ruby","Rock","Birch Wood","Dark Oak Wood","Fir Wood","Wood","Oak Wood","Anvil","Cauldron","Fletching Table","Furnace","Workbench","Boat Map","Gem Map","Blue Gem","Green Gem","Pink Gem","Red Gem","Yellow Gem","Adamantite Axe","Gold Axe","Mithril Axe","Steel Axe","Wood Axe","Oak Bow","Wood Bow","Birch bow","Fir bow","Ancient Bow","Adamantite Pickaxe","Gold Pickaxe","Mithril Pickaxe","Steel Pickaxe","Wood Pickaxe","Rope","Shovel","Adamantite Sword","Gold Sword","Mithril Sword","Obamium Sword","Steel Sword","milk","Adamantite Arrow","Fire arrow","Flint Arrow","Lightning Arrow","Mithril Arrow","Steel Arrow","Water Arrow","Chiefs Spear","Chunky Hammer","Gronks Sword","Gronks Sword Projectile","Night Blade","Wyvern Dagger","Black Shard","Blade","Hammer Shaft","Spear Tip","Sword Hilt","Wolf Claws","Wolfskin","Wyvern Claws"};
-        public string[] commands = new string[] {"/give", "/maxhp", "/maxstamina", "maxshield", "/maxhunger", "/totem", "/respawn", "/gold", "/nomobs", "/nobosses", "/heal", "/indestructible"};
+        public string[] item_names = new string[] {"(Bark)","(Chest)","(Coal)","(Coin)","(Flint)","(Adamantite Boots)","(Chunkium Boots)","(Gold Boots)","(Mithril Boots)","(Obamium Boots)","(Steel Boots)","(Wolfskin Boots)","(Adamantite Helmet)","(Chunkium Helmet)","(Gold Helmet)","(Mithril Helmet)","(Obamium Helmet)","(Steel Helmet)","(Wolfskin Helmet)","(Adamantite Pants)","(Chunkium Pants)","(Gold Pants)","(Mithril Pants)","(Obamium Pants)","(Steel Pants)","(Wolfskin Pants)","(Adamantite Chestplate)","(Chunkium Chestplate)","(Gold Chestplate)","(Mithril Chestplate)","(Obamium Chestplate)","(Steel Chestplate)","(Wolfskin Chestplate)","(Wood Doorway)","(Wood Doorway)","(Wood Floor)","(Wood Pole)","(Wood Pole)","(Wood Roof)","(Wood stairs)","(Wood stairs thinn)","(Wood Wall)","(Wood Wall Half)","(Wood Wall Tilted)","(Torch)","(Red Apple)","(Bowl)","(Dough)","(Flax Fibers)","(Flax)","(Raw Meat)","(Gulpon Shroom)","(Ligon Shroom)","(Slurbon Shroom)","(Sugon Shroom)","(Wheat)","(Bread)","(Cooked Meat)","(Apple Pie)","(Meat Pie)","(Meat Soup)","(Purple Soup)","(Red Soup)","(Weird Soup)","(Yellow Soup)","(AncientCore)","(Adamantite bar)","(Chunkium bar)","(Gold bar)","(Iron bar)","(Mithril bar)","(Obamium bar)","(Ancient Bone)","(Dragonball)","(Fireball)","(Lightningball)","(Rock Projectile)","(Rock Projectile)","(Gronk Projectile)","(Spike Attack)","(Gronk Projectile)","(Waterball)","(Windball)","(Adamantite Ore)","(Chunkium Ore)","(Gold Ore)","(Iron Ore)","(Mithril Ore)","(Obamium Ore)","(Ruby)","(Rock)","(Birch Wood)","(Dark Oak Wood)","(Fir Wood)","(Wood)","(Oak Wood)","(Anvil)","(Cauldron)","(Fletching Table)","(Furnace)","(Workbench)","(Boat Map)","(Gem Map)","(Blue Gem)","(Green Gem)","(Pink Gem)","(Red Gem)","(Yellow Gem)","(Adamantite Axe)","(Gold Axe)","(Mithril Axe)","(Steel Axe)","(Wood Axe)","(Oak Bow)","(Wood Bow)","(Birch bow)","(Fir bow)","(Ancient Bow)","(Adamantite Pickaxe)","(Gold Pickaxe)","(Mithril Pickaxe)","(Steel Pickaxe)","(Wood Pickaxe)","(Rope)","(Shovel)","(Adamantite Sword)","(Gold Sword)","(Mithril Sword)","(Obamium Sword)","(Steel Sword)","(milk)","(Adamantite Arrow)","(Fire arrow)","(Flint Arrow)","(Lightning Arrow)","(Mithril Arrow)","(Steel Arrow)","(Water Arrow)","(Chiefs Spear)","(Chunky Hammer)","(Gronks Sword)","(Gronks Sword Projectile)","(Night Blade)","(Wyvern Dagger)","(Black Shard)","(Blade)","(Hammer Shaft)","(Spear Tip)","(Sword Hilt)","(Wolf Claws)","(Wolfskin)","(Wyvern Claws)"};
+        public string[] first_commands = new string[] {"/give", "/maxhp", "/maxstamina", "maxshield", "/maxhunger", "/totem", "/respawn", "/gold", "/nomobs", "/nobosses", "/heal", "/indestructible", "/help"};
         ChatBox chatBox;
+        GameObject myPanel;
+        string[] choices;
         bool active = false;
         int ticker = 0;
         bool maxhp_active = false;
@@ -23,7 +26,9 @@ namespace ConsoleCommands
         bool noBosses = false;
         bool noMobs = false;
 
-
+        Canvas canvas;
+        TextMeshProUGUI ac_text;
+        bool done = false;
 
 
         public void Log(string message)
@@ -381,12 +386,176 @@ namespace ConsoleCommands
                 Log($"added {amount} gold to inventory");
                 
             }
+        
+            if (command.StartsWith("/list"))
+            {
+                Log("/maxstamina, /maxhp, /maxhunger, /maxshield, /totem, /indestructible, /nobosses, /nomobs, /heal, /print, /give, /gold, /list, /help");
+            }
+
+            if (command.StartsWith("/help"))
+            {
+                if (command.Split().Length > 1)
+                {
+                    string choice = command.Split()[1];
+                    if (choice == "/maxstamina")
+                        Log("/maxstamina <amount> - sets max stamina to <amount>");
+                    if (choice == "/maxhp")
+                        Log("/maxhp <amount> - sets max hp to <amount>");
+                    if (choice == "/maxhunger")
+                        Log("/maxhunger <amount> - sets max hunger to <amount>");
+                    if (choice == "/maxshield")
+                        Log("/maxshield <amount> - sets max shield to <amount>");
+                    if (choice == "/totem")
+                        Log("/totem - moves totem to player");
+                    if (choice == "/indestructible")
+                        Log("/indestructible - makes all buildings indestructible");
+                    if (choice == "/nobosses")
+                        Log("/nobosses <true/false> - removes all bosses");
+                    if (choice == "/nomobs")
+                        Log("/nomobs <true/false> - removes all mobs");
+                    if (choice == "/heal")
+                        Log("/heal <amount> - heals player for <amount> hp");
+                    if (choice == "/print")
+                        Log("/print - prints all item names to bepinex log. go to bepinex/config/bepinex.cfg and change logging to true for complete usage.");
+                    if (choice == "/give")
+                        Log("/give (<item name>) <amount> - gives <amount> of <item name> to player. Parentheses are needed!");
+                    if (choice == "/gold")
+                        Log("/gold <amount> - gives <amount> gold to player");
+                    if (choice == "/list")
+                        Log("/list - lists all commands");
+                    if (choice == "/help")
+                        Log("/help <command> - gives info on <command>");
+                }
+                else
+                {
+                    Log("run /help <command> for more info");
+                }
+            }
         }
 
 
         public void Update()
         {
-            if (SceneManager.GetActiveScene().name != "GameAfterLobby") return;
+            if (SceneManager.GetActiveScene().name != "GameAfterLobby")
+            {
+                myPanel = null;
+                ac_text = null;
+                chatBox = null;
+                canvas = null;
+                active = false;
+                ticker = 0;
+                done = false;
+
+                return;
+            }
+            if (done)
+            {
+                if (chatBox.typing)
+                {
+                    myPanel.SetActive(true);
+                    ac_text.text = "";
+                    if (chatBox.inputField.text.Split().Length > 1)
+                    {
+                        if (chatBox.inputField.text.Split()[0] == "/give")
+                        {
+                            //Log(input.Split().Length.ToString());
+                            string[] textToDisplay = chatBox.inputField.text.Split();
+                            for (int i = 0; i < item_names.Length; i++)
+                            {
+                                //Log(textToDisplay[0].ToString());
+                                if (textToDisplay[1] != "" && textToDisplay[1] != " " && item_names[i].StartsWith(textToDisplay[1].ToString()))
+                                {
+                                    ac_text.text = ac_text.text + " " + item_names[i];
+                                    //Log(command_text.text);
+                                }
+                            }
+
+                            //this is for autocomplete for the second word
+                            if (Input.GetKeyDown(KeyCode.Tab)) 
+                            {
+                                string[] strings = ac_text.text.Split();
+
+                                string first_word = chatBox.inputField.text.Split()[0].ToString();
+                                
+                                string needed_word = strings[1].ToString();
+                                
+                                
+
+                                chatBox.inputField.text = first_word + " " + needed_word;
+                                
+                                
+                                chatBox.inputField.caretPosition = chatBox.inputField.text.Length + 1;
+
+                                
+
+                            }
+                        }
+                        else
+                        {
+                            //Log(input.Split().Length.ToString());
+                            string[] textToDisplay = chatBox.inputField.text.Split();
+                            for (int i = 0; i < first_commands.Length; i++)
+                            {
+                                //Log(textToDisplay[0].ToString());
+                                if (textToDisplay[1] != "" && textToDisplay[1] != " " && item_names[i].StartsWith(textToDisplay[1].ToString()))
+                                {
+                                    ac_text.text = ac_text.text + " " + first_commands[i];
+                                    //Log(command_text.text);
+                                }
+                            }
+
+                            //this is for autocomplete for the second word
+                            if (Input.GetKeyDown(KeyCode.Tab)) 
+                            {
+                                string[] strings = ac_text.text.Split();
+
+                                string first_word = chatBox.inputField.text.Split()[0].ToString();
+                                
+                                string needed_word = strings[1].ToString();
+                                
+                                
+
+                                chatBox.inputField.text = first_word + " " + needed_word;
+                                
+                                
+                                chatBox.inputField.caretPosition = chatBox.inputField.text.Length + 1;
+
+                                
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (chatBox.inputField.text == "") return;
+                        for (int i = 0; i < first_commands.Length; i++)
+                        {
+                            //Log(textToDisplay[0].ToString());
+                            if (first_commands[i].StartsWith(chatBox.inputField.text.ToString()))
+                            {
+                                ac_text.text = ac_text.text + " " + first_commands[i];
+                                //Log(command_text.text);
+                            }
+                        }
+                        //autocomplete for first word
+                        if (Input.GetKeyDown(KeyCode.Tab))
+                        {
+                            string[] strings = ac_text.text.Split();
+                            
+                            string needed_word = strings[1].ToString();
+                            chatBox.inputField.text = needed_word;
+                            
+                            chatBox.inputField.caretPosition = chatBox.inputField.text.Length+1;
+                            
+                        }
+                    }
+                }
+                else
+                {
+                    myPanel.SetActive(false);
+                }
+            }
+            
             
             //if active and scene name is 'GameAfterLobby'
             if (!active && ticker == 0)
@@ -396,7 +565,16 @@ namespace ConsoleCommands
                 if (chatBox == null)
                     active = false;
                 if (chatBox != null)
+                {
                     active = true;
+                    canvas = GameObject.Find("UI (1)").GetComponent<Canvas>();
+                    if (canvas != null)
+                    {
+                        //Log("found canvas, it is named " + canvas.name);
+                    }
+                    
+                }
+                    
             }
 
             if (!active)
@@ -413,7 +591,7 @@ namespace ConsoleCommands
             else if (active)
             {
                 ticker++;
-                if (ticker > 600)
+                if (ticker > 120)
                 {
                     
                     if (maxhp_active)
@@ -431,7 +609,7 @@ namespace ConsoleCommands
                             {
                                 Destroy(all[i]);
                             }
-                            if (all[i].name == "lilDave(Clone)")
+                            if (all[i].name == "LilDave(Clone)")
                             {
                                 Destroy(all[i]);
                             }
@@ -496,7 +674,32 @@ namespace ConsoleCommands
                 }
                 if (Input.GetKeyDown(KeyCode.Slash))
                 {
+                    if (!done)
+                    {
+                        myPanel = new GameObject("daltonyx_panel");
+                        //Log(myPanel.name + " created");
+                        myPanel.transform.SetParent(canvas.transform, false);
+                        
+                        //canvas.gameObject.AddComponent<TextMeshProUGUI>();
+                        ac_text = myPanel.AddComponent<TextMeshProUGUI>();
+                        if (ac_text != null)
+                        {
+                            //Log("found ac_text");
+                        }
+                        ac_text.fontSize = 17;
+                        ac_text.color = Color.white;
+                        //set ac_text to bold
+                        ac_text.fontStyle = FontStyles.Bold;
+                        ac_text.alignment = TextAlignmentOptions.Left;
+                        myPanel.transform.position = new Vector3(chatBox.inputField.transform.position.x-82, chatBox.inputField.transform.position.y-17, chatBox.inputField.transform.position.z);
+                        //allow overflow
+                        ac_text.enableWordWrapping = false;
+                        ac_text.overflowMode = TextOverflowModes.Overflow;
 
+                        
+                        done = true;
+                    }
+                    
                     
                     if (chatBox.typing)
                     {
@@ -551,7 +754,7 @@ namespace ConsoleCommands
 
         }
     
-    
+
         
 
     }
